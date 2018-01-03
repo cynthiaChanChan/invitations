@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="envolopeWrapper">
+    <image class="top" src="../../images/top.png" mode="widthFix"></image>
+    <image class="bottom" src="../../images/bottom.jpg" mode="widthFix"></image>
+    <image class="body" src="../../images/body.png" mode="widthFix"></image>
+    <view class="card">
+      <image src="../../images/card.jpg" mode="widthFix"></image>
+      <view class="title">欢迎您来制作请柬！</view>
+    </view>
+    <view class="invitation">
+      <image src="../../images/invitation.jpg" mode="widthFix"></image>
+      <view class="content">
+        <view class="title">制作请柬</view>
+        <view class="subTitle">2018年1月2号 09： 00</view>
+        <view class="subTitle">欢迎小请柬小程序</view>
+      </view>
+    </view>
+  </view>
+  <view class="footer">
+		<view class="button" bindtap="">案例展示</view>
+		<view class="button" bindtap="goCreate">制作请柬</view>
+    </view>
+</view>

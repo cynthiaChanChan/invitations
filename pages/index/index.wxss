@@ -1,0 +1,107 @@
+page {
+  background-color: #fbfbfb;
+}
+
+.envolopeWrapper {
+  position: relative;
+  width: 90%;
+  margin: 10% auto;
+}
+
+.envolopeWrapper image {
+  width: 100%;
+}
+
+.envolopeWrapper .top {
+  display: block;
+}
+
+.envolopeWrapper .bottom {
+  display: block;
+  border-bottom-right-radius: 15rpx;
+  border-bottom-left-radius: 15rpx;
+}
+
+.envolopeWrapper .body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  border-bottom-right-radius: 15rpx;
+  border-bottom-left-radius: 15rpx;
+}
+
+.envolopeWrapper .card {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  border-radius: 15rpx;
+  animation-name: slideCard;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+.envolopeWrapper .card .title {
+  color: #ffffff;
+  text-align: center;
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.envolopeWrapper .invitation {
+  border: 2px solid #6dd6d9;
+  width: 75%;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 4;
+  animation-name: fadeOutDown;
+  animation-delay: 3s;
+  animation-duration: 3s;
+  animation-fill-mode: both;
+}
+
+.envolopeWrapper .invitation .content {
+  color: #ed4b34;
+  font-size: 30rpx;
+  position: absolute;
+  bottom: 80rpx;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.footer {
+  box-shadow: none;
+}
+
+
+/*  animation*/
+@keyframes slideCard {
+  40%,60%{transform:translate3d(0,-100%,0)}
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: .8;
+    transform: translate3d(-50%, 120%, 0);
+  }
+
+  100% {
+    opacity:1;
+    transform: translate3d(-50%, 120%, 0);
+  }
+}

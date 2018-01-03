@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/create/create",
+    "pages/template/template"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fbfbfb",
+    "navigationBarTitleText": "欢迎小请柬",
+    "navigationBarTextStyle":"black"
+  }
+}
