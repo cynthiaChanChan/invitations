@@ -85,3 +85,90 @@ view {
     text-align: center;
     font-size: 29rpx;
 }
+
+/*  头部指引部分开始*/
+
+.sticky_wrapper {
+	position: relative;
+	text-align: center;
+	background-color: #fbfbfb;
+	padding: 20rpx 20rpx 60rpx 20rpx;
+	color: #333;
+	font-size: 30rpx;
+	line-height: 1;
+	box-shadow: 1px 1px 6px rgba(0,0,0,.3);
+}
+
+.sticky_wrapper .switch {
+	width: 80rpx;
+	height: 80rpx;
+	position: absolute;
+	bottom: -40rpx;
+	right: 20rpx;
+}
+
+.sticky_wrapper .wrap .button {
+	display: inline-block;
+	vertical-align: middle;
+	width: 20%;
+	height: 60rpx;
+	line-height: 60rpx;
+	border-radius: 10rpx;
+	border: 2rpx solid #ccc;
+	border-bottom-color: #b3b3b3;
+}
+
+.sticky_wrapper .wrap .button.left {
+	left: 0;
+	background-color: #f5f5f5;
+}
+
+.sticky_wrapper .wrap .button.right {
+	color: #fff;
+	right: 0;
+	background-color: #e74c3c;
+}
+
+.sticky_wrapper .wrap .stages {
+	width: 60%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.sticky_wrapper .wrap .stages .stage{
+	position: relative;
+	width: 33.33%;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 0;
+	height: 64rpx;
+	background-repeat: repeat-x;
+	background-position: center center;
+	background-image: url(http://g.m.fans-me.com/invitationImg/line.png);
+}
+
+.sticky_wrapper .wrap .stages .circle {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height: 25rpx;
+	width: 25rpx;
+	border: 5rpx solid #999;
+	background: #999;
+	border-radius: 25rpx;
+}
+
+.sticky_wrapper .wrap .stages .stage.current .circle{
+	background: #333;
+	border-color: #333;
+}
+
+.sticky_wrapper .wrap .stages .title {
+	position: absolute;
+	bottom: -20rpx;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}

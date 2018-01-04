@@ -1,0 +1,81 @@
+<view class="page" style="background: center center /cover url({{result.templateData.img}}) fixed no-repeat;">
+  <view class="sticky_wrapper">
+    <view class="wrap">
+      <view class="button left">改变场景</view>
+        <view class="stages">
+          <view class="stage"><view class="circle"></view><view class="title">案例</view></view>
+          <view class="stage current"><view class="circle"></view><view class="title">制作</view></view>
+          <view class="stage"><view class="circle"></view><view class="title">分享</view></view>
+        </view>
+      <view class="button right">生成请柬</view>
+    </view>
+    <view class="colors first">
+      <view class="title">选择内容字体颜色</view>
+      <view class="wrapper">
+        <view class="color" data-color="#000" style="background-color: #000"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#fff" style="background-color: #fff"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#04b29f" style="background-color: #04b29f"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#3366ff" style="background-color: #3366ff"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#f42d22" style="background-color: #f42d22"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#c31717" style="background-color: #c31717"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#f4ad22" style="background-color: #f4ad22"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#d5049d" style="background-color: #d5049d"></view>
+      </view>
+    </view>
+    <view class="colors">
+      <view class="title">选择按钮字体与边框颜色</view>
+      <view class="wrapper">
+        <view class="color" data-color="#000" style="background-color: #000"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#fff" style="background-color: #fff"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#04b29f" style="background-color: #04b29f"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#3366ff" style="background-color: #3366ff"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#f42d22" style="background-color: #f42d22"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#c31717" style="background-color: #c31717"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#f4ad22" style="background-color: #f4ad22"></view>
+      </view>
+      <view class="wrapper">
+        <view class="color" data-color="#d5049d" style="background-color: #d5049d"></view>
+      </view>
+    </view>
+    <image class="switch" src="../../images/cancel.png"></image>
+  </view>
+  <view class="index_container" style="color: {{result.templateData.fontColor}};">
+      <view class="intro slideInLeft">
+         <text>{{result.title}}</text>
+      </view>
+      <view class="subTitle slideInRight">
+         <text>{{result.duration.beDate}} {{result.duration.beTime}} 至 {{result.duration.enDate}} {{result.duration.enTime}}</text>
+      </view>
+      <view class="eng slideInRight">{{result.locationInfo.address}}</view>
+      <view class="buttons clearfix flipInX">
+     		<view class="button" style="color: {{result.templateData.buttonColor}}; border: 1px solid {{result.templateData.buttonColor}};">应邀报名</view>
+     		<view class="button" style="color: {{result.templateData.buttonColor}}; border: 1px solid {{result.templateData.buttonColor}};">前往参加</view>
+      </view>
+  </view>
+</view>

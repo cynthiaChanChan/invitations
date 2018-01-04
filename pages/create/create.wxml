@@ -8,9 +8,9 @@
   </view>
   <view class="gallery">
     <view class="imgWrapper" wx:for="{{choosenGallery.bgs}}" wx:key="{{index}}">
-      <image src="{{item}}" mode="aspectFill" catchtap="previewImg" data-index="{{index}}"></image>
+      <image src="{{item.img}}" mode="aspectFill" catchtap="previewImg" data-index="{{index}}"></image>
       <view class="buttons">
-        <view class="button" bindtap="goTemplate" style="background-color: {{choices[choosenIndex].bgColor}};">案例</view>
+        <view class="button" bindtap="goTemplate" data-index="{{index}}" style="background-color: {{choices[choosenIndex].bgColor}};">案例</view>
         <view class="button" style="background-color: {{choices[choosenIndex].bgColor}};">制作</view>
       </view>
     </view>

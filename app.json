@@ -2,7 +2,9 @@
   "pages":[
     "pages/index/index",
     "pages/create/create",
-    "pages/template/template"
+    "pages/template/template",
+    "pages/registration/registration",
+    "pages/edit/edit"
   ],
   "window":{
     "backgroundTextStyle":"light",

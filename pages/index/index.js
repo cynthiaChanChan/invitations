@@ -7,8 +7,8 @@ Page({
 
   },
   onLoad: function() {
-    wx.redirectTo({
-      url: "../create/create"
+    wx.reLaunch({
+      url: "../edit/edit"
     })
   },
   goCreate: function () {
