@@ -8,7 +8,7 @@ Page({
   },
   onLoad: function() {
     wx.reLaunch({
-      url: "../edit/edit"
+      url: "../submit/submit?id=72"
     })
   },
   goCreate: function () {

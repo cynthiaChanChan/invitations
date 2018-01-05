@@ -4,7 +4,9 @@
     "pages/create/create",
     "pages/template/template",
     "pages/registration/registration",
-    "pages/edit/edit"
+    "pages/edit/edit",
+    "pages/invitation/invitation",
+    "pages/submit/submit"
   ],
   "window":{
     "backgroundTextStyle":"light",

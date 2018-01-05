@@ -1,0 +1,13 @@
+<view class="page" style="background: center center /cover url({{result.templateData.img}}) fixed no-repeat;">
+	<form class="acceptanceForm">
+		<input maxlength="15" bindinput="nameInput" placeholder="姓名name" style="border-bottom: 4rpx solid {{result.templateData.buttonColor}}; color: {{result.templateData.fontColor}};" placeholder-style="color: {{result.templateData.fontColor}};" />
+		<input maxlength="11" type="digit" bindblur="phoneBlur" bindinput="phoneInput" style="border-bottom: 4rpx solid {{result.templateData.buttonColor}}; color: {{result.templateData.fontColor}};" placeholder="电话phone number" placeholder-style="color:{{result.templateData.fontColor}};" value="{{phoneInput}}"/>
+		<button class="button" bindtap="save" plain="true" style="border: 1px solid {{result.templateData.buttonColor}}; color: {{result.templateData.buttonColor}};">提交</button>
+	</form>
+</view>
+<view class="lightbox" bindtap="hideHint" hidden="{{isHintHidden}}">
+	<view class="fail">
+	  <image class="hintImg" src="../../images/sorry.png" mode="widthFix"></image>
+	  <view class="text"><text>{{hintText}}</text></view>
+	</view>
+</view>

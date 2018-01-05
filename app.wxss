@@ -119,8 +119,9 @@ view {
 }
 
 .sticky_wrapper .wrap .button.left {
+  color: #fff;
 	left: 0;
-	background-color: #f5f5f5;
+	background-color: rgba(231,76,60,.8);
 }
 
 .sticky_wrapper .wrap .button.right {

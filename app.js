@@ -1,5 +1,33 @@
 //app.js
+const apiUrl = 'https://korjo.fans-me.com/KorjoApi/GetSessionKey';
 App({
+  getUser: function (callback) {
+        if (!wx.getStorageSync('invitaionsUserInfo')) {
+            wx.login({
+                success: function(res) {
+                    console.log(res.code);
+                    const code = res.code;
+                    if (code) {
+                        wx.request({
+                            url: apiUrl,
+                            data: {id: 23, js_code: code},//23
+                            dataType: "json",
+                            header: {
+                               'content-type': 'application/x-www-form-urlencoded'
+                            },
+                            success: function(response) {
+                               const result = JSON.parse(response.data);
+                               wx.setStorageSync('invitationsUserInfo', result);
+                               callback();
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            callback()
+        }
+  },
   loading: function() {
       if (wx.showLoading) {
           wx.showLoading({
