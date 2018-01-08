@@ -20,6 +20,9 @@ Page({
          that.setData({result})
        });
     },
+    share: function() {
+
+    },
     goRegistration: function(e) {
   	    wx.navigateTo({
   	  	    url: "../submit/submit?id=" + this.id,

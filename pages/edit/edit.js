@@ -6,6 +6,7 @@ const getUrl = "/korjoApi/GetInvitationInfo";
 const domain = app.globalData.domain;
 Page({
     data: {
+        isCanvasShow: "block",//none
         result: {},
         isHintHidden: true,
         animation: "slideInDown",
@@ -121,14 +122,13 @@ Page({
       })
     },
     switch: function() {
-       let animation = this.data.animation;
-       if (animation == "slideInDown") {
-         animation = "slideOutUp";
-       } else {
-         animation = "slideInDown";
-       }
        this.setData({
-         animation,
+         animation: "slideOutUp"
+       })
+    },
+    open: function() {
+       this.setData({
+         animation: "slideInDown fast"
        })
     },
     chooseFontColor: function(e) {
@@ -164,13 +164,13 @@ Page({
     },
     goRegistration: function(e) {
   	    wx.navigateTo({
-  	  	    url: "../registration/registration",
+  	  	    url: "../registration/registration"
   	    })
     },
-    goTimeline: function(e) {
-        wx.navigateTo({
-            url: "../timeline/timeline"
-        })
+    goCreate: function(e) {
+      wx.navigateTo({
+          url: "../create/create"
+      })
     },
     //地图
     openLocation: function(e) {
@@ -182,6 +182,50 @@ Page({
             scale: 16,
             name: locationInfo.name,
             address: locationInfo.address
+        })
+    },
+    ShareImg: function() {
+      this.uploadImg();
+    },
+    createShareImg: function(bgPath) {
+        const that = this;
+        const result = that.data.result;
+        this.setData({
+           isCanvasShow: "block"
+        })
+        const ctx = wx.createCanvasContext('shareImg');
+        ctx.drawImage("../../images/envolope.jpg", 0, 0, that.windowWidth, that.data.canvasHeight);
+        ctx.drawImage("../../images/post.png", that.windowWidth - 15 -60, 15, 60, 80);
+        ctx.drawImage("../../images/3.png", that.windowWidth - 10 -60, 20, 50, 70);
+        ctx.drawImage("../../images/postmark.png", 100 + 50, 32, 100, 50);
+        ctx.setFillStyle('#ffffff');
+        ctx.setFontSize(16);
+        ctx.setTextAlign('center');
+        ctx.setTextBaseline('middle')
+        ctx.fillText(`开始时间：${result.duration.beDate} ${result.duration.beTime}`, that.windowWidth / 2, 110);
+        ctx.fillText(`结束时间：${result.duration.enDate} ${result.duration.enTime}`, that.windowWidth / 2, 135);
+        ctx.fillText(`举办地点：${result.locationInfo.name}`, that.windowWidth / 2, 160);
+        ctx.draw();
+
+    },
+    uploadImg: function() {
+        const that = this;
+        //canvas 宽度为图片宽，若canvas宽带小于图片会模糊
+        that.windowWidth = 300;
+        that.setData({
+          windowWidth: that.windowWidth,
+          canvasHeight: that.windowWidth * 0.71
+        });
+        //需要下载图片后drawImage, 否则手机做不成
+        wx.downloadFile({
+          url: that.data.result.templateData.img,
+          success: function(response) {
+            if (response.statusCode == 200) {
+              const bgPath = response.tempFilePath;
+              console.log("bgPath", bgPath);
+              that.createShareImg(bgPath)
+            }
+          }
         })
     },
     save: function() {

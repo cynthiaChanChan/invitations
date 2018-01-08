@@ -12,7 +12,7 @@ Page({
         const beDate = `${today.getFullYear()}-${util.formatNumber(today.getMonth() + 1)}-${util.formatNumber(today.getDate())}`;
         const result = {
           templateData,
-          title: "派对饭局",
+          title: "活动名称",
           duration: {
             beDate,
             beTime: "19:00",
@@ -37,10 +37,15 @@ Page({
   	  	    url: "../registration/registration",
   	    })
     },
-    goTimeline: function(e) {
-        wx.navigateTo({
-            url: "../timeline/timeline"
-        })
+    goCreate: function(e) {
+  	    wx.navigateTo({
+  	  	    url: "../create/create",
+  	    })
+    },
+    goEdit: function(e) {
+  	    wx.navigateTo({
+  	  	    url: "../edit/edit",
+  	    })
     },
     //地图
     openLocation: function(e) {

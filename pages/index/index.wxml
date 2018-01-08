@@ -17,7 +17,7 @@
     </view>
   </view>
   <view class="footer">
-		<view class="button" bindtap="">案例展示</view>
+		<view class="button" bindtap="">我的请柬</view>
 		<view class="button" bindtap="goCreate">制作请柬</view>
     </view>
 </view>

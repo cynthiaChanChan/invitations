@@ -4,14 +4,26 @@ const getUrl = "/korjoApi/GetInvitationInfo";
 const domain = app.globalData.domain;
 Page({
     data: {
-      isHintHidden: true
+      isHintHidden: true,
+      namePlaceHolder: "姓名",
+      phonePlaceHolder: "手机"
     },
     onLoad: function(options) {
       this.id = options.id;
+      let namePlaceHolder = this.data.namePlaceHolder;
+      let phonePlaceHolder = this.data.phonePlaceHolder;
       this.submitData = wx.getStorageSync("submitData") || {};
+      if (this.submitData.name) {
+        namePlaceHolder = "";
+      }
+      if (this.submitData.phone) {
+        phonePlaceHolder = "";
+      }
       this.setData({
             nameInput: this.submitData.name || "",
-            phoneInput: this.submitData.phone || ""
+            phoneInput: this.submitData.phone || "",
+            phonePlaceHolder,
+            namePlaceHolder
       })
       this.getResultData(this.id);
     },
@@ -70,13 +82,23 @@ Page({
                     setTimeout(goSend, 2000);
 
                 } else {
+                    wx.setStorageSync("submitData", {
+                        name: that.submitData.name,
+                        phone: that.submitData.phone
+                    })
+                    const status = JSON.parse(response.data.replace(/[()]/g,'')).status;
+                    let title = "提交成功";
+                    if (status == 201) {
+                        title = "您已经报名";
+                    }
                     wx.showToast({
-                        title: "提交成功",
+                        title,
                         icon: "success",
                         mask: true,
                         duration: 2000
                     });
-                    // setTimeout(that.goInvitation, 2000);
+                    console.log("save successfully", response);
+                    setTimeout(that.goInvitation, 2000);
                 }
 
             }
@@ -127,21 +149,13 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
             },
             success: function(response) {
-              wx.setStorageSync("submitData", {
-                  name: that.submitData.name,
-                  phone: that.submitData.phone
-              })
-              const status = JSON.parse(response.data.replace(/[()]/g,'')).status;
-              let title = "提交成功";
-              if (status == 201) {
-                  title = "您已经报名";
-              }
               wx.showToast({
                   title: title,
                   icon: "success",
                   duration: 1500
               });
-              // setTimeout(that.goInvitation, 1500);
+              console.log("submit successfully", response);
+              setTimeout(that.goInvitation, 1500);
             }
         });
     },

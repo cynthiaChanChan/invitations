@@ -1,24 +1,28 @@
 <view class="page" style="background: center center /cover url({{result.templateData.img}}) fixed no-repeat;">
   <view class="sticky_wrapper">
     <view class="wrap">
-      <view class="button left">改变场景</view>
+      <view class="button left" bindtap="goCreate">改变场景</view>
         <view class="stages">
           <view class="stage current"><view class="circle"></view><view class="title">案例</view></view>
           <view class="stage"><view class="circle"></view><view class="title">制作</view></view>
           <view class="stage"><view class="circle"></view><view class="title">分享</view></view>
         </view>
-      <view class="button right">开始制作</view>
+      <view class="button right" bindtap="goEdit">开始制作</view>
     </view>
     <image class="switch" src="../../images/cancel.png"></image>
   </view>
   <view class="index_container" style="color: {{result.templateData.fontColor}};">
-      <view class="intro slideInLeft">
-         <text>{{result.title}}</text>
+      <view class="outerWrapper">
+        <view class="wrapper">
+          <view class="intro slideInLeft">
+             <text>{{result.title}}</text>
+          </view>
+          <view class="subTitle slideInRight">
+             <text>{{result.duration.beDate}} {{result.duration.beTime}} 至 {{result.duration.enDate}} {{result.duration.enTime}}</text>
+          </view>
+          <view class="eng slideInRight">{{result.locationInfo.address}}</view>
+        </view>
       </view>
-      <view class="subTitle slideInRight">
-         <text>{{result.duration.beDate}} {{result.duration.beTime}} 至 {{result.duration.enDate}} {{result.duration.enTime}}</text>
-      </view>
-      <view class="eng slideInRight">{{result.locationInfo.address}}</view>
       <view class="buttons clearfix flipInX">
      		<view class="button" bindtap="goRegistration" style="color: {{result.templateData.buttonColor}}; border: 1px solid {{result.templateData.buttonColor}};">应邀报名</view>
      		<view class="button" bindtap="openLocation" style="color: {{result.templateData.buttonColor}}; border: 1px solid {{result.templateData.buttonColor}};">前往参加</view>

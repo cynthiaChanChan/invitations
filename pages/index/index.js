@@ -1,5 +1,3 @@
-//index.js
-//获取应用实例
 const app = getApp()
 
 Page({
@@ -7,9 +5,12 @@ Page({
 
   },
   onLoad: function() {
-    wx.reLaunch({
-      url: "../submit/submit?id=72"
-    })
+    // wx.reLaunch({
+    //   url: "../registration/registration"
+    // })
+    // wx.reLaunch({
+    //   url: "../edit/edit?id=72"
+    // })
   },
   goCreate: function () {
     wx.navigateTo({

@@ -7,7 +7,7 @@ const choices = [{
     id: 1,
     img:  `${url}show/1.jpg`,
     fontColor: "#000",
-    buttonColor: "ee1b44"
+    buttonColor: "#ee1b44"
    },{
      id: 2,
      img:  `${url}show/2.jpg`,
@@ -22,7 +22,7 @@ const choices = [{
         id: 1,
         img:  `${url}party/1.jpg`,
         fontColor: "#000",
-        buttonColor: "ee1b44"
+        buttonColor: "#ee1b44"
     },{
        id: 2,
        img:  `${url}party/2.jpg`,
@@ -42,7 +42,7 @@ const choices = [{
       id: 1,
       img:  `${url}business/1.jpg`,
       fontColor: "#000",
-      buttonColor: "ee1b44"
+      buttonColor: "#ee1b44"
     }]
   }, {
     type: "婚礼典礼",
@@ -52,7 +52,7 @@ const choices = [{
       id: 1,
       img:  `${url}ceremony/1.jpg`,
       fontColor: "#000",
-      buttonColor: "ee1b44"
+      buttonColor: "#ee1b44"
     }]
   }, {
     type: "自定义",

@@ -1,13 +1,14 @@
 <view class="page" style="background: center center /cover url({{result.templateData.img}}) fixed no-repeat;">
+  <image bindtap="open" id="open" src="../../images/edit.png"></image>
   <view class="sticky_wrapper {{animation}}">
     <view class="wrap">
-      <view class="button left">改变场景</view>
+      <view class="button left" bindtap="goCreate">改变场景</view>
         <view class="stages">
           <view class="stage"><view class="circle"></view><view class="title">案例</view></view>
           <view class="stage current"><view class="circle"></view><view class="title">制作</view></view>
           <view class="stage"><view class="circle"></view><view class="title">分享</view></view>
         </view>
-      <view class="button right" bindtap="save">生成请柬</view>
+      <view class="button right" bindtap="ShareImg">生成请柬</view>
     </view>
     <view class="colors first">
       <view class="title">选择内容字体颜色</view>
@@ -58,19 +59,24 @@
     <image bindtap="switch" class="switch" src="../../images/cancel.png"></image>
   </view>
   <view class="index_container" style="color: {{result.templateData.fontColor}};">
-      <view class="intro">
-         <text>{{result.title}}</text>
+    <view class="outerWrapper">
+      <view class="wrapper">
+        <view class="intro">
+           <text>{{result.title}}</text>
+        </view>
+        <view class="subTitle">
+           <text>{{result.duration.beDate}} {{result.duration.beTime}} 至 {{result.duration.enDate}} {{result.duration.enTime}}</text>
+        </view>
+        <view class="eng">{{result.locationInfo.address}}</view>
       </view>
-      <view class="subTitle">
-         <text>{{result.duration.beDate}} {{result.duration.beTime}} 至 {{result.duration.enDate}} {{result.duration.enTime}}</text>
-      </view>
-      <view class="eng">{{result.locationInfo.address}}</view>
-      <view class="buttons clearfix">
-     		<view class="button" style="color: {{result.templateData.buttonColor}}; border: 1px solid {{result.templateData.buttonColor}};">应邀报名</view>
-     		<view class="button" style="color: {{result.templateData.buttonColor}}; border: 1px solid {{result.templateData.buttonColor}};">前往参加</view>
-      </view>
+    </view>
+    <view class="buttons clearfix">
+   		<view class="button" bindtap="goRegistration" style="color: {{result.templateData.buttonColor}}; border: 1px solid {{result.templateData.buttonColor}};">应邀报名</view>
+   		<view class="button" bindtap="openLocation" style="color: {{result.templateData.buttonColor}}; border: 1px solid {{result.templateData.buttonColor}};">前往参加</view>
+    </view>
   </view>
 </view>
+<canvas style="width: {{windowWidth}}px; height: {{canvasHeight}}px; display: {{isCanvasShow}};" canvas-id="shareImg"></canvas>
 <view class="lightbox" bindtap="hideHint" hidden="{{isHintHidden}}">
 	<view class="fail">
 	  <image class="hintImg" src="../../images/sorry.png" mode="widthFix"></image>

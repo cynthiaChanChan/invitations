@@ -89,7 +89,10 @@ view {
 /*  头部指引部分开始*/
 
 .sticky_wrapper {
-	position: relative;
+	position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
 	text-align: center;
 	background-color: #fbfbfb;
 	padding: 20rpx 20rpx 60rpx 20rpx;
@@ -97,6 +100,7 @@ view {
 	font-size: 30rpx;
 	line-height: 1;
 	box-shadow: 1px 1px 6px rgba(0,0,0,.3);
+  z-index: 2;
 }
 
 .sticky_wrapper .switch {

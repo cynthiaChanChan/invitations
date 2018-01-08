@@ -5,8 +5,9 @@ Page({
 
     },
     onLoad: function(options) {
+      const templateData = wx.getStorageSync("templateData");
       const result = {
-        bgImg: options.img
+        templateData
       }
       this.setData({result});
     }
