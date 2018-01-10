@@ -38,9 +38,7 @@ Page({
   	    })
     },
     goCreate: function(e) {
-  	    wx.navigateTo({
-  	  	    url: "../create/create",
-  	    })
+  	    app.navigateBack();
     },
     goEdit: function(e) {
   	    wx.navigateTo({

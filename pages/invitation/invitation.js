@@ -4,7 +4,8 @@ const getUrl = "/korjoApi/GetInvitationInfo";
 const domain = app.globalData.domain;
 Page({
     data: {
-        result: {}
+        result: {},
+        animation: "slideInDown"
     },
     onLoad: function(options) {
         this.id = options.id;
@@ -23,9 +24,24 @@ Page({
     share: function() {
 
     },
+    switch: function() {
+       this.setData({
+         animation: "slideOutUp"
+       })
+    },
+    open: function() {
+       this.setData({
+         animation: "slideInDown fast"
+       })
+    },
     goRegistration: function(e) {
   	    wx.navigateTo({
   	  	    url: "../submit/submit?id=" + this.id,
+  	    })
+    },
+    goEdit: function(e) {
+  	    wx.navigateTo({
+  	  	    url: "../edit/edit?id=" + this.id,
   	    })
     },
     //地图

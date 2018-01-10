@@ -5,9 +5,9 @@ Page({
 
   },
   onLoad: function() {
-    // wx.reLaunch({
-    //   url: "../registration/registration"
-    // })
+    wx.reLaunch({
+      url: "../create/create"
+    })
     // wx.reLaunch({
     //   url: "../edit/edit?id=72"
     // })
@@ -15,6 +15,11 @@ Page({
   goCreate: function () {
     wx.navigateTo({
 			url: "../create/create"
+		})
+  },
+  goTimeline: function () {
+    wx.navigateTo({
+			url: "../timeline/timeline"
 		})
   }
 })

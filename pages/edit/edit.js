@@ -187,7 +187,7 @@ Page({
     ShareImg: function() {
       this.uploadImg();
     },
-    createShareImg: function(bgPath) {
+    createShareImg: function(bgPath, data) {
         const that = this;
         const result = that.data.result;
         this.setData({
@@ -206,7 +206,31 @@ Page({
         ctx.fillText(`结束时间：${result.duration.enDate} ${result.duration.enTime}`, that.windowWidth / 2, 135);
         ctx.fillText(`举办地点：${result.locationInfo.name}`, that.windowWidth / 2, 160);
         ctx.draw();
+        setTimeout(()=> {
+          that.getShareImg(data, (shareImg) => {
+              data.shareImg = shareImg;
+              that.sendRequest(data);
+              console.log(shareImg)
+          })
+        }, 100);
 
+    },
+    getShareImg: function(data, callback) {
+        const that = this;
+        wx.canvasToTempFilePath({
+            canvasId: 'shareImg',
+            success: function(res) {
+                app.uploadBanner(res.tempFilePath, function(result) {
+                  const shareImg = that.data.domain + result;
+                  callback(shareImg);
+                  console.log("success: ", shareImg)
+                })
+            },
+            fail: function(res) {
+                console.log("fail to create Canvas shareImg: ")
+                callback(that.data.banner);
+            }
+        })
     },
     uploadImg: function() {
         const that = this;

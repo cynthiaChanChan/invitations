@@ -1,5 +1,6 @@
 //app.js
-const apiUrl = 'https://korjo.fans-me.com/KorjoApi/GetSessionKey';
+const domain = "https://www.korjo.cn";
+const apiUrl = '/KorjoApi/GetSessionKey';
 App({
   getUser: function (callback) {
         if (!wx.getStorageSync('invitaionsUserInfo')) {
@@ -9,7 +10,7 @@ App({
                     const code = res.code;
                     if (code) {
                         wx.request({
-                            url: apiUrl,
+                            url: domain + apiUrl,
                             data: {id: 23, js_code: code},//23
                             dataType: "json",
                             header: {
@@ -50,9 +51,14 @@ App({
           wx.hideToast()
       }
   },
+  navigateBack: () => {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   uploadBanner: function(img, callback) {
       wx.uploadFile({
-          url: 'https://korjo.fans-me.com/KorjoApi/AdminUpload',
+          url: 'domain/KorjoApi/AdminUpload',
           filePath: img,
           name: 'file',
           formData: {
@@ -65,6 +71,6 @@ App({
       })
   },
   globalData: {
-    domain: "https://korjo.fans-me.com"
+    domain: domain
   }
 })

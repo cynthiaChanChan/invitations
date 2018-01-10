@@ -1,6 +1,7 @@
 const app = getApp()
 const util = require('../../utils/util.js');
 const getUrl = "/korjoApi/GetInvitationInfo";
+const SaveSendMsgUrl = "/KorjoApi/SaveSendMsg";
 const domain = app.globalData.domain;
 Page({
     data: {
@@ -59,7 +60,7 @@ Page({
             userid: wx.getStorageSync('invitationsUserInfo').openid
         }
         wx.request({
-            url: "https://korjo.fans-me.com/korjoApi/SaveInvitationUser",
+            url: domain + "/korjoApi/SaveInvitationUser",
             data: {dataJson: JSON.stringify(dataJson)},
             method: 'POST',
             header: {
@@ -142,7 +143,7 @@ Page({
             "openid": wx.getStorageSync("invitationsUserInfo").openid
         }
         wx.request({
-            url: SaveSendMsgUrl,
+            url: domain + SaveSendMsgUrl,
             data: {jsonData: JSON.stringify(jsonData)},
             method: 'POST',
             header: {

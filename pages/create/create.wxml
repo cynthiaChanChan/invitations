@@ -8,11 +8,20 @@
   </view>
   <view class="gallery">
     <view class="imgWrapper" wx:for="{{choosenGallery.bgs}}" wx:key="{{index}}">
-      <image src="{{item.img}}" mode="aspectFill" catchtap="previewImg" data-index="{{index}}"></image>
+      <view class="image">
+        <image src="{{item.img}}" mode="aspectFill" catchtap="previewImg" data-index="{{index}}"></image>
+        <view class="prviewButton" catchtap="previewImg" data-index="{{index}}">查看大图</view>
+      </view>
       <view class="buttons">
-        <view class="button" bindtap="goTemplate" data-index="{{index}}" style="background-color: {{choices[choosenIndex].bgColor}};">案例</view>
-        <view class="button" style="background-color: {{choices[choosenIndex].bgColor}};">制作</view>
+        <view class="button" bindtap="goTemplate" data-index="{{index}}" style="background-color: {{choices[choosenIndex].bgColor}};">案例与制作</view>
       </view>
     </view>
   </view>
+</view>
+<view class="addImg" bindtap="upLoadImg">
+		<image class="add" src="../../images/add.png" mode="widthFix"></image>
+		<view class="imgInfo">
+			<view class="h2">从手机选择一张图片做为请柬的背景图</view>
+			<view class="h3">图片尺寸建议为375px * 667px</view>
+		</view>
 </view>

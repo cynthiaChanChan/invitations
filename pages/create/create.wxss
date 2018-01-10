@@ -10,6 +10,7 @@
   left: 2%;
   right: 2%;
   background-color: #fbfbfb;
+  z-index: 2;
 }
 
 .chooser .choiceWrapper {
@@ -60,12 +61,36 @@
   vertical-align: top;
 }
 
-.gallery .imgWrapper image{
+.gallery .imgWrapper .image{
+  position: relative;
   margin: auto;
   width: 320rpx;
   height: 568rpx;
-  border: 1px solid #D9DDE0;
   border-radius: 8rpx;
+}
+
+.gallery .imgWrapper .image image{
+  width: 320rpx;
+  height: 568rpx;
+}
+
+.gallery .imgWrapper .prviewButton {
+  background-color: rgba(255,255,255,.7);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  margin: 0 auto;
+  width: 320rpx;
+  color: #000;
+  font-size: 30rpx;
+  height: 70rpx;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -webkit-ustify-content: center;
+  justify-content: center;
 }
 
 .gallery .imgWrapper .buttons {
@@ -80,4 +105,31 @@
   height: 70rpx;
   line-height: 70rpx;
   margin-bottom: 20rpx;
+}
+
+/* 上传图片 部分*/
+
+ .addImg {
+  text-align: center;
+	font-size: 30rpx;
+	padding: 20rpx 0;
+	margin-top: 60rpx;
+	margin-bottom: 30rpx;
+	background-color: #f0f0f0;
+	color: #000000;
+}
+
+.addImg .add {
+	width: 60rpx;
+	margin-right: 20rpx;
+	display: inline-block;
+}
+
+.addImg .imgInfo {
+	display: inline-block;
+}
+
+.addImg .h3 {
+	color: #999;
+	font-size: 28rpx;
 }

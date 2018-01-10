@@ -87,6 +87,13 @@ view {
 }
 
 /*  头部指引部分开始*/
+#open {
+	width: 90rpx;
+	height: 90rpx;
+	position: absolute;
+	top: 40rpx;
+	right: 20rpx;
+}
 
 .sticky_wrapper {
 	position: absolute;
@@ -149,7 +156,7 @@ view {
 	height: 64rpx;
 	background-repeat: repeat-x;
 	background-position: center center;
-	background-image: url(http://g.m.fans-me.com/invitationImg/line.png);
+	background-image: url(https://www.korjo.cn/xcx/invitationImg/line.png);
 }
 
 .sticky_wrapper .wrap .stages .circle {
@@ -176,4 +183,51 @@ view {
 	left: 50%;
 	-webkit-transform: translateX(-50%);
 	transform: translateX(-50%);
+}
+
+/*animation*/
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.slideInDown {
+   -webkit-animation-name: fadeInDown;
+           animation-name: fadeInDown;
+   -webkit-animation-duration: 1.5s;
+           animation-duration: 1.5s;
+	 -webkit-animation-delay: 1s;
+ 					animation-delay: 1s;
+   -webkit-animation-fill-mode: both;
+           animation-fill-mode: both;
+}
+
+.slideInDown.fast {
+	-webkit-animation-delay: 0s;
+				 animation-delay: 0s;
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.slideOutUp {
+  animation-name: slideOutUp;
+	-webkit-animation-duration: 1s;
+					animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+					animation-fill-mode: both;
 }

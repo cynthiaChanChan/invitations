@@ -36,9 +36,10 @@ Page({
   previewImg: function(e) {
     const index = e.currentTarget.dataset.index;
     const choosenGallery = this.data.choosenGallery;
+    console.log("choosenGallery: ", choosenGallery.bgs[index]);
     wx.previewImage({
-      current: choosenGallery.bgs[index], // 当前显示图片的http链接
-      urls: [choosenGallery.bgs[index]] // 需要预览的图片http链接列表
+      current: choosenGallery.bgs[index].img, // 当前显示图片的http链接
+      urls: [choosenGallery.bgs[index].img] // 需要预览的图片http链接列表
     })
   }
 })

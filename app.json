@@ -6,7 +6,8 @@
     "pages/registration/registration",
     "pages/edit/edit",
     "pages/invitation/invitation",
-    "pages/submit/submit"
+    "pages/submit/submit",
+    "pages/timeline/timeline"
   ],
   "window":{
     "backgroundTextStyle":"light",

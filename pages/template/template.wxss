@@ -63,7 +63,7 @@ view.buttons {
 	width: 45%;
 	padding: 20rpx 0;
 	font-size: 30rpx;
-	background-color: rgba(255,255,255,.6);
+	background-color: rgba(255,255,255,.7);
 }
 
 .buttons .button:first-of-type {
