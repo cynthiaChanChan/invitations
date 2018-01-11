@@ -6,7 +6,7 @@ const getUrl = "/korjoApi/GetInvitationInfo";
 const domain = app.globalData.domain;
 Page({
     data: {
-        isCanvasShow: "block",//none
+        isCanvasShow: "none",//none
         result: {},
         isHintHidden: true,
         animation: "slideInDown",
@@ -16,22 +16,22 @@ Page({
         buttonColors: imgData.buttonColors
     },
     onLoad: function(options) {
-        //编辑旧请柬
         this.id = options.id;
+        this.update = options.update;
         if (this.id) {
+          //编辑旧请柬
           this.getResultData(this.id);
           return;
         }
         //创建请柬
         const templateData = wx.getStorageSync("templateData");
+        const invitationData = this.getStoredData();
         const that = this;
-        const today = new Date();
-        const beDate = `${today.getFullYear()}-${util.formatNumber(today.getMonth() + 1)}-${util.formatNumber(today.getDate())}`;
         let result = {
           templateData,
-          title: ""
+          title: invitationData.title
         }
-        result.locationInfo = {
+        result.locationInfo = invitationData.locationInfo || {
           name: "天河又一城",
           address: "广东省广州市天河区天河中心体育西路54号",
           latitude: 23.1324255,
@@ -42,12 +42,38 @@ Page({
     },
     getResultData: function(id) {
        const that = this;
-       app.loading();
-       util.getRequest(domain + getUrl, {id}, function(response) {
-         app.hideLoading();
-         const result = JSON.parse(response.data.datajson);
+       let result = {};
+       //如果是修改背景图
+       if (this.update) {
+         const invitationData = wx.getStorageSync("invitationData");
+         result = {
+           templateData: wx.getStorageSync("templateData"),
+           title: invitationData.title,
+           locationInfo: invitationData.locationInfo,
+           duration: invitationData.duration
+         }
          that.setData({result})
-       });
+       } else {
+         //如果是修改其他
+         app.loading();
+         util.getRequest(domain + getUrl, {id}, function(response) {
+           app.hideLoading();
+           result = JSON.parse(response.data.datajson);
+           that.setStoredData({
+             title: result.title,
+             locationInfo: result.locationInfo,
+             duration: result.duration
+           });
+           wx.setStorageSync("templateData", result.templateData);
+           that.setData({result})
+         });
+       }
+    },
+    getStoredData: function() {
+       return wx.getStorageSync("invitationData") || {};
+    },
+    setStoredData: function(invitationData) {
+       wx.setStorageSync("invitationData", invitationData);
     },
     getDate: function(result) {
       const date = new Date();
@@ -57,6 +83,7 @@ Page({
       const beDate = String(year) + "-" + util.formatNumber(month) + "-" + util.formatNumber(day);
       result.duration.beDate = beDate;
       result.duration.enDate = beDate;
+      console.log("beStart", String(year) + "-01-01");
       this.setData({
           result,
           beStart: String(year) + "-01-01",
@@ -91,6 +118,7 @@ Page({
     conformLocation: function() {
       const that = this;
       const result = this.data.result;
+      const invitationData = this.getStoredData();
       app.loading();
       wx.chooseLocation({
           success: function(res) {
@@ -102,6 +130,9 @@ Page({
                   longitude: res.longitude
               }
               result.locationInfo = locationInfo;
+              //缓存用户填的数据
+              invitationData.locationInfo = locationInfo;
+              that.setStoredData(invitationData);
               that.setData({
                   result,
                   isHintHidden: true
@@ -134,6 +165,7 @@ Page({
     chooseFontColor: function(e) {
         const index = e.currentTarget.dataset.index;
         const result = this.data.result;
+        const templateData = wx.getStorageSync("templateData");
         let fontColorActiveIdx = this.data.fontColorActiveIdx;
         const fontColors = this.data.fontColors;
         if (fontColors[fontColorActiveIdx]) {
@@ -142,11 +174,15 @@ Page({
         fontColors[index].active = "active";
         fontColorActiveIdx = index;
         result.templateData.fontColor = fontColors[index].color;
+        //缓存用户填的数据
+        templateData.fontColor = fontColors[index].color;
+        wx.setStorageSync("templateData", templateData);
         this.setData({result, fontColorActiveIdx, fontColors})
     },
     chooseButtonColor: function(e) {
         const index = e.currentTarget.dataset.index;
         const result = this.data.result;
+        const templateData = wx.getStorageSync("templateData");
         let buttonColorActiveIdx = this.data.buttonColorActiveIdx;
         const buttonColors = this.data.buttonColors;
         if (buttonColors[buttonColorActiveIdx]) {
@@ -155,11 +191,16 @@ Page({
         buttonColors[index].active = "active";
         buttonColorActiveIdx = index;
         result.templateData.buttonColor = buttonColors[index].color;
+        templateData.buttonColor = buttonColors[index].color;
+        wx.setStorageSync("templateData", templateData);
         this.setData({result, buttonColorActiveIdx, buttonColors})
     },
     titleInput: function(e) {
         const result = this.data.result;
+        const invitationData = this.getStoredData();
         result.title = e.detail.value;
+        invitationData.title = e.detail.value;
+        this.setStoredData(invitationData);
         this.setData({result});
     },
     goRegistration: function(e) {
@@ -168,9 +209,11 @@ Page({
   	    })
     },
     goCreate: function(e) {
-      wx.navigateTo({
-          url: "../create/create"
-      })
+      let url = "../create/create";
+      if(this.id) {
+        url += "?id=" + this.id + "&update=true";
+      }
+      wx.navigateTo({url});
     },
     //地图
     openLocation: function(e) {
@@ -184,32 +227,86 @@ Page({
             address: locationInfo.address
         })
     },
+    showHint: function(hintText) {
+        this.setData({
+            isHintHidden: false,
+            hintText: hintText
+        })
+        setTimeout(this.hideHint, 1500);
+    },
+    hideHint: function() {
+        this.setData({
+            isHintHidden: true
+        })
+    },
+    checkIsActive: function() {
+        const address = this.data.result.locationInfo ? this.data.result.locationInfo.address : "";
+        const title = this.data.result.title;
+        if (!address || !title) {
+            if (!title) {
+                this.showHint("活动名称未填写")
+            } else if (!address) {
+                this.showHint("活动地点未提供")
+            }
+            return false;
+        } else {
+            return true;
+        }
+    },
     ShareImg: function() {
+      // 是否满足提交条件
+      if (!this.checkIsActive()) {
+         return;
+      }
+      //时间是否可以
+      const duration = this.data.result.duration;
+      const beginTime = util.formatDate(`${duration.beDate} ${duration.beTime}:00`);
+      const endTime = util.formatDate(`${duration.enDate} ${duration.enTime}:00`);
+      const now = new Date().getTime();
+      if (now > endTime.getTime()) {
+          const hintText = "结束时间需大于当前时间";
+          this.setData({
+              isHintHidden: false,
+              hintText
+          })
+          setTimeout(this.hideHint, 1500);
+          return;
+      }
+      if (beginTime.getTime() > endTime.getTime()) {
+          const hintText = "开始时间需小于结束时间";
+          this.setData({
+              isHintHidden: false,
+              hintText
+          })
+          setTimeout(this.hideHint, 1500);
+          return;
+      }
       this.uploadImg();
     },
-    createShareImg: function(bgPath, data) {
+    createShareImg: function(bgPath) {
         const that = this;
         const result = that.data.result;
         this.setData({
            isCanvasShow: "block"
         })
         const ctx = wx.createCanvasContext('shareImg');
+        const envolopeHeight = that.windowWidth * 0.71;
         ctx.drawImage("../../images/envolope.jpg", 0, 0, that.windowWidth, that.data.canvasHeight);
-        ctx.drawImage("../../images/post.png", that.windowWidth - 15 -60, 15, 60, 80);
-        ctx.drawImage("../../images/3.png", that.windowWidth - 10 -60, 20, 50, 70);
-        ctx.drawImage("../../images/postmark.png", 100 + 50, 32, 100, 50);
+        ctx.drawImage("../../images/post.png", that.windowWidth - 25 -80, 25, 80, 110);
+        ctx.drawImage(bgPath, that.windowWidth - 15 -80, 35, 60, 90);
+        ctx.drawImage("../../images/postmark.png", that.windowWidth -200, 55, 120, 60);
         ctx.setFillStyle('#ffffff');
-        ctx.setFontSize(16);
+        ctx.setFontSize(18);
         ctx.setTextAlign('center');
         ctx.setTextBaseline('middle')
-        ctx.fillText(`开始时间：${result.duration.beDate} ${result.duration.beTime}`, that.windowWidth / 2, 110);
-        ctx.fillText(`结束时间：${result.duration.enDate} ${result.duration.enTime}`, that.windowWidth / 2, 135);
-        ctx.fillText(`举办地点：${result.locationInfo.name}`, that.windowWidth / 2, 160);
+        ctx.fillText(`开始时间：${result.duration.beDate} ${result.duration.beTime}`, that.windowWidth / 2, 170);
+        ctx.fillText(`结束时间：${result.duration.enDate} ${result.duration.enTime}`, that.windowWidth / 2, 200);
+        ctx.fillText(`举办地点：${result.locationInfo.name}`, that.windowWidth / 2, 230);
         ctx.draw();
         setTimeout(()=> {
-          that.getShareImg(data, (shareImg) => {
-              data.shareImg = shareImg;
-              that.sendRequest(data);
+          that.getShareImg(result, (shareImg) => {
+              result.shareImg = shareImg;
+              that.save(result);
               console.log(shareImg)
           })
         }, 100);
@@ -221,49 +318,67 @@ Page({
             canvasId: 'shareImg',
             success: function(res) {
                 app.uploadBanner(res.tempFilePath, function(result) {
-                  const shareImg = that.data.domain + result;
+                  const shareImg = domain + result;
                   callback(shareImg);
                   console.log("success: ", shareImg)
                 })
             },
             fail: function(res) {
                 console.log("fail to create Canvas shareImg: ")
-                callback(that.data.banner);
+                callback("");
             }
         })
     },
     uploadImg: function() {
+        app.loading();
         const that = this;
+        const img = that.data.result.templateData.img;
         //canvas 宽度为图片宽，若canvas宽带小于图片会模糊
-        that.windowWidth = 300;
+        that.windowWidth = 400;
         that.setData({
           windowWidth: that.windowWidth,
-          canvasHeight: that.windowWidth * 0.71
+          canvasHeight: that.windowWidth * 4 / 5
         });
         //需要下载图片后drawImage, 否则手机做不成
-        wx.downloadFile({
-          url: that.data.result.templateData.img,
-          success: function(response) {
-            if (response.statusCode == 200) {
-              const bgPath = response.tempFilePath;
-              console.log("bgPath", bgPath);
-              that.createShareImg(bgPath)
+        if (img.indexOf("korjo") > -1) {
+          wx.downloadFile({
+            url: img,
+            success: function(response) {
+              if (response.statusCode == 200) {
+                const bgPath = response.tempFilePath;
+                console.log("bgPath", bgPath);
+                that.createShareImg(bgPath)
+              }
             }
-          }
-        })
+          })
+        } else {
+          that.createShareImg(img);
+        }
     },
-    save: function() {
-      app.loading();
-      const result = this.data.result;
+    save: function(result) {
+      const that = this;
       const jsonData = {
           title: result.title.trim(),
           locationInfo: result.locationInfo,
           duration: result.duration,
-          templateData: result.templateData
+          templateData: result.templateData,
+          shareImg: result.shareImg
       }
-      app.getUser(()=> {
-        this.saveData(jsonData);
-      });
+      if (result.templateData.img.indexOf("korjo") > -1) {
+        console.log("无需上传背景图")
+        app.getUser(()=> {
+          that.saveData(jsonData);
+        });
+      } else {
+        //如果是临时路径，需先上传图片
+        app.uploadBanner(result.templateData.img, (path) => {
+          jsonData.templateData.img = domain + path;
+          console.log("upLoad BgImg:", path);
+          app.getUser(()=> {
+            that.saveData(jsonData);
+          });
+        })
+      }
     },
     saveData: function(jsonData) {
         const that = this;
@@ -307,5 +422,5 @@ Page({
               }
           });
         }
-    },
+    }
 })

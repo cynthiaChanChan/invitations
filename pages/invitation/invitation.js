@@ -21,8 +21,18 @@ Page({
          that.setData({result})
        });
     },
-    share: function() {
-
+    onShareAppMessage: function(res) {
+        const that = this;
+        return {
+            title: "邀您参与" + that.data.result.title,
+            path: "/pages/invitation/invitation?id=" + that.id + "&share=true",
+            imageUrl: that.data.result.shareImg || "../../images/share.jpg",
+            success: function(res) {
+            },
+            fail: function(res) {
+            // 转发失败
+            }
+        }
     },
     switch: function() {
        this.setData({

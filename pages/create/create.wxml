@@ -18,10 +18,10 @@
     </view>
   </view>
 </view>
-<view class="addImg" bindtap="upLoadImg">
+<view class="addImg" bindtap="upLoadImg" wx:if="{{choices[4].active}}">
 		<image class="add" src="../../images/add.png" mode="widthFix"></image>
 		<view class="imgInfo">
 			<view class="h2">从手机选择一张图片做为请柬的背景图</view>
-			<view class="h3">图片尺寸建议为375px * 667px</view>
+			<view class="h3">建议尺寸为375px * 667px，或竖屏拍摄的图片</view>
 		</view>
 </view>

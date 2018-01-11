@@ -5,11 +5,8 @@ Page({
 
   },
   onLoad: function() {
-    wx.reLaunch({
-      url: "../create/create"
-    })
     // wx.reLaunch({
-    //   url: "../edit/edit?id=72"
+    //   url: "../create/create?id=72&update=true"
     // })
   },
   goCreate: function () {

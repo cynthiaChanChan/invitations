@@ -119,6 +119,7 @@ view {
 }
 
 .sticky_wrapper .wrap .button {
+  font-size: inherit;
 	display: inline-block;
 	vertical-align: middle;
 	width: 20%;

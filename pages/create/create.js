@@ -7,8 +7,10 @@ Page({
     domain: app.globalData.domain,
     choices: imgData.choices
   },
-  onLoad: function () {
+  onLoad: function (options) {
     const choices = this.data.choices;
+    this.id = options.id;
+    this.update = options.update;
     let choosenIndex = 0;
     choices[choosenIndex].active = "active";
     const choosenGallery = choices[choosenIndex];
@@ -25,13 +27,35 @@ Page({
     const choosenGallery = choices[choosenIndex];
     this.setData({choices, choosenIndex, choosenGallery});
   },
+  navigateToTemplate: function() {
+    let url = "../template/template";
+    if (this.id) {
+      url += "?id=" + this.id + "&update=" + this.update;
+    }
+    wx.navigateTo({url});
+  },
   goTemplate: function(e) {
     const index = e.currentTarget.dataset.index;
     const choosenGallery = this.data.choosenGallery;
-    wx.setStorageSync("templateData",choosenGallery.bgs[index]);
-    wx.navigateTo({
-			url: "../template/template"
-		})
+    let templateData =  choosenGallery.bgs[index];
+    if (this.update) {
+      //更新旧请柬, 只更新图，颜色不变
+      templateData = wx.getStorageSync('templateData');
+      templateData.img = choosenGallery.bgs[index].img;
+    }
+    wx.setStorageSync("templateData",templateData);
+    this.navigateToTemplate();
+  },
+  upLoadImg: function() {
+    app.chooseImage((res) => {
+      console.log("用户上传背景图：", res);
+      wx.setStorageSync("templateData", {
+          img: res[0],
+          fontColor: "#000",
+          buttonColor: "#ee1b44"
+      });
+      this.navigateToTemplate();
+    })
   },
   previewImg: function(e) {
     const index = e.currentTarget.dataset.index;

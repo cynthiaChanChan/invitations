@@ -56,9 +56,21 @@ App({
       delta: 1
     })
   },
+  chooseImage: function(callback) {
+      wx.chooseImage({
+          count: 1, // 默认9
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
+          success: function (res) {
+          // 返回选定照片的本地文件路径列表
+              var tempFilePaths = res.tempFilePaths;
+              callback(tempFilePaths);
+          }
+      })
+  },
   uploadBanner: function(img, callback) {
       wx.uploadFile({
-          url: 'domain/KorjoApi/AdminUpload',
+          url: `${domain}/KorjoApi/AdminUpload`,
           filePath: img,
           name: 'file',
           formData: {
