@@ -1,12 +1,12 @@
 <view class="page" style="background: center center /cover url({{result.templateData.img}}) fixed no-repeat;">
-	<form class="acceptanceForm">
+	<form class="acceptanceForm" bindsubmit="save" report-submit="true">
 		<view class="outerWrapper">
 			<view class="wrapper">
 				<input maxlength="15" bindinput="nameInput" value="{{nameInput}}" placeholder="{{namePlaceHolder}}" style="border-bottom: 4rpx solid {{result.templateData.buttonColor}}; color: {{result.templateData.fontColor}};"/>
 				<input maxlength="11" type="digit" bindblur="phoneBlur" bindinput="phoneInput" value="{{phoneInput}}" style="border-bottom: 4rpx solid {{result.templateData.buttonColor}}; color: {{result.templateData.fontColor}};" placeholder="{{phonePlaceHolder}}" value="{{phoneInput}}"/>
 		  </view>
 	  </view>
-		<button class="button" bindtap="save" plain="true" style="border: 1px solid {{result.templateData.buttonColor}}; color: {{result.templateData.buttonColor}};">提交</button>
+		<button class="button" disabled="{{isDisabled}}" formType="submit" plain="true" style="border: 1px solid {{result.templateData.buttonColor}}; color: {{result.templateData.buttonColor}};">提交</button>
 	</form>
 </view>
 <view class="lightbox" bindtap="hideHint" hidden="{{isHintHidden}}">

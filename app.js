@@ -3,7 +3,7 @@ const domain = "https://www.korjo.cn";
 const apiUrl = '/KorjoApi/GetSessionKey';
 App({
   getUser: function (callback) {
-        if (!wx.getStorageSync('invitaionsUserInfo')) {
+        if (!wx.getStorageSync('invitationsUserInfo')) {
             wx.login({
                 success: function(res) {
                     console.log(res.code);

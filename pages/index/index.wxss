@@ -39,7 +39,7 @@ page {
   z-index: 2;
   border-radius: 15rpx;
   animation-name: slideCard;
-  animation-duration: 4s;
+  animation-duration: 3s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: both;
 }
@@ -48,7 +48,7 @@ page {
   color: #ffffff;
   text-align: center;
   position: absolute;
-  bottom: 50%;
+  bottom: 40%;
   left: 0;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -57,17 +57,18 @@ page {
 
 .envolopeWrapper .invitation {
   border: 2px solid #6dd6d9;
-  width: 75%;
+  width: 85%;
   position: absolute;
-  bottom: 120%;
+  bottom: 115%;
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   z-index: 4;
   animation-name: fadeOutDown;
   animation-delay: 3s;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-fill-mode: both;
+  box-shadow: 1px 1px 8px 0px rgba(0,0,0,.4);
 }
 
 .envolopeWrapper .invitation .content {
@@ -78,6 +79,7 @@ page {
   left: 0;
   width: 100%;
   text-align: center;
+  line-height: 1.5;
 }
 
 .footer {

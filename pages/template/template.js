@@ -2,7 +2,8 @@ const app = getApp()
 const util = require('../../utils/util.js');
 Page({
     data: {
-        result: {}
+        result: {},
+        animation: "slideInDown"
     },
     onLoad: function(options) {
         this.id = options.id;
@@ -47,12 +48,17 @@ Page({
     goCreate: function(e) {
   	    app.navigateBack();
     },
+    switch: function() {
+       this.setData({
+         animation: "slideOutUp"
+       })
+    },
     goEdit: function(e) {
         let url = "../edit/edit";
         if (this.id) {
           url += "?id=" + this.id + "&update=" + this.update;
         }
-  	    wx.navigateTo({url})
+  	    wx.redirectTo({url})
     },
     //地图
     openLocation: function(e) {

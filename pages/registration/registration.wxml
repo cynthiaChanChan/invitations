@@ -1,11 +1,29 @@
 <view class="page" style="background: center center /cover url({{result.templateData.img}}) fixed no-repeat;">
+	<view class="sticky_wrapper">
+		<view class="wrap">
+			<view class="button left" bindtap="goCreate">返回</view>
+				<view class="stages">
+					<view class="stage current"><view class="circle"></view><view class="title">案例</view></view>
+					<view class="stage"><view class="circle"></view><view class="title">制作</view></view>
+					<view class="stage"><view class="circle"></view><view class="title">分享</view></view>
+				</view>
+			<view class="button right" bindtap="goEdit">开始制作</view>
+		</view>
+		<image class="switch" bindtap="switch" src="../../images/cancel.png"></image>
+	</view>
 	<form class="acceptanceForm" style="color: {{result.templateData.fontColor}};">
 		<view class="outerWrapper">
 			<view class="wrapper">
-				<input maxlength="15" style="border-bottom: 4rpx solid {{result.templateData.buttonColor}};" bindinput="nameInput" placeholder="姓名"/>
-				<input maxlength="11" style="border-bottom: 4rpx solid {{result.templateData.buttonColor}};" type="digit" bindblur="phoneBlur" bindinput="phoneInput" placeholder="电话" value="{{phoneInput}}"/>
+				<input maxlength="15" style="border-bottom: 4rpx solid {{result.templateData.buttonColor}};"  placeholder="姓名"/>
+				<input maxlength="11" style="border-bottom: 4rpx solid {{result.templateData.buttonColor}};" type="digit"  placeholder="电话" value="{{phoneInput}}"/>
 			</view>
 	  </view>
-				<button class="button" plain="true" style="border: 1px solid {{result.templateData.buttonColor}}; color: {{result.templateData.buttonColor}};">提交</button>
+				<button class="button" bindtap="save" plain="true" style="border: 1px solid {{result.templateData.buttonColor}}; color: {{result.templateData.buttonColor}};">提交</button>
 	</form>
+</view>
+<view class="lightbox" bindtap="hideHint" hidden="{{isHintHidden}}">
+	<view class="fail">
+	  <image class="hintImg" src="../../images/sorry.png" mode="widthFix"></image>
+	  <view class="text"><text>{{hintText}}</text></view>
+	</view>
 </view>

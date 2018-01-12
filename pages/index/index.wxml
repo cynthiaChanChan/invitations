@@ -10,9 +10,9 @@
     <view class="invitation">
       <image src="../../images/invitation.jpg" mode="widthFix"></image>
       <view class="content">
-        <view class="title">制作请柬</view>
-        <view class="subTitle">2018年1月2号 09： 00</view>
-        <view class="subTitle">欢迎小请柬小程序</view>
+        <view class="title">制作请柬再分享给朋友</view>
+        <view class="subTitle">请点击“制作请柬”开始选择背景图</view>
+        <view class="subTitle">粉我吧科技出品</view>
       </view>
     </view>
   </view>

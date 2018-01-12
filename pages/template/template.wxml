@@ -9,7 +9,7 @@
         </view>
       <view class="button right" bindtap="goEdit">开始制作</view>
     </view>
-    <image class="switch" src="../../images/cancel.png"></image>
+    <image class="switch" bindtap="switch" src="../../images/cancel.png"></image>
   </view>
   <view class="index_container" style="color: {{result.templateData.fontColor}};">
       <view class="outerWrapper">

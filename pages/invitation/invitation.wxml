@@ -1,6 +1,6 @@
 <view class="page" style="background: center center /cover url({{result.templateData.img}}) fixed no-repeat;">
-  <image bindtap="open" id="open" src="../../images/edit.png"></image>
-  <view class="sticky_wrapper {{animation}}">
+  <image bindtap="open" id="open" src="../../images/edit.png" hidden="{{isHide}}"></image>
+  <view class="sticky_wrapper {{animation}}" hidden="{{isHide}}">
     <view class="wrap">
       <view class="button left" bindtap="goEdit">修改</view>
         <view class="stages">

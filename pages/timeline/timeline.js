@@ -15,7 +15,6 @@ Page({
         let isHintHidden = true;
         app.loading();
         commonFun.getRequest(domain + listUrl, {userid: wx.getStorageSync('invitationsUserInfo').openid}, function(response) {
-            wx.hideToast();
             const resultList = response.data;
             const listsArray = [];
             if (resultList.length > 0) {
@@ -31,6 +30,7 @@ Page({
                 isHintHidden,
                 listsArray
             })
+            app.hideLoading();
         })
     },
     getAcceptance: function(e) {

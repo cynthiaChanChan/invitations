@@ -153,11 +153,6 @@ const choices = [{
       img:  `${url}children/8.jpg`,
       fontColor: "#000",
       buttonColor: "#f0415f"
-    },{
-      id: 9,
-      img:  `${url}children/9.jpg`,
-      fontColor: "#000",
-      buttonColor: "#f0415f"
     }]
   }, {
     type: "典礼活动",
@@ -209,8 +204,8 @@ const choices = [{
     bgColor: "#33cbcc"
 }];
 // 上面的颜色也要出现
-const fontColors = [{"color":"#000"},{"color":"#1aad19"},{"color":"#e74c3c"},{"color":"#04b29f"},{"color":"#3366ff"},{"color":"#c31717"},{"color":"#f4ad22"},{"color":"#d5049d"}];
-const buttonColors = [{"color":"#04b29f"},{"color":"#ee1b44"},{"color":"#e74c3c"},{"color":"#e51873"},{"color":"#f0415f"},{"color":"#dd7854"},{"color":"#f4ad22"},{"color":"#d5049d"}];
+const fontColors = [{"color":"#000"},{"color":"#1aad19"},{"color":"#e74c3c"},{"color":"#04b29f"},{"color":"#3366ff"},{"color":"#c31717"},{"color":"#dd7854"},{"color":"#d5049d"}];
+const buttonColors = [{"color":"#04b29f"},{"color":"#ee1b44"},{"color":"#e74c3c"},{"color":"#e51873"},{"color":"#f0415f"},{"color":"#fb8736"},{"color":"#dd7854"},{"color":"#d5049d"}];
 module.exports.choices = choices;
 module.exports.fontColors = fontColors;
 module.exports.buttonColors = buttonColors;

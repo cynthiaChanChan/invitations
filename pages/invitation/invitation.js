@@ -10,7 +10,11 @@ Page({
     onLoad: function(options) {
         this.id = options.id;
         this.getResultData(this.id);
-
+        if (options.share) {
+          this.setData({
+            isHide: true
+          })
+        }
     },
     getResultData: function(id) {
        const that = this;

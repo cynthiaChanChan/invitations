@@ -5,6 +5,7 @@ const SaveSendMsgUrl = "/KorjoApi/SaveSendMsg";
 const domain = app.globalData.domain;
 Page({
     data: {
+      isDisabled: false,
       isHintHidden: true,
       namePlaceHolder: "姓名",
       phonePlaceHolder: "手机"
@@ -39,13 +40,23 @@ Page({
          const dateArray = dateString.split(",", 3);
          that.dateForMessage = dateArray[0] + "-" + dateArray[1] + "-" + (dateArray[2] - 1);
          that.sendDate = dateArray[0] + "年" + dateArray[1] + "月" + (dateArray[2] - 1) + "日";
+         if (util.formatDate(`${result.duration.enDate} ${result.duration.enTime}:00`) < new Date().getTime()) {
+           console.log("it's over!")
+           that.setData({
+               isDisabled: true,
+               isHintHidden: false,
+               hintText: "抱歉，活动时间已经结束无法应邀",
+           })
+         }
          that.setData({result})
        });
     },
-    save: function() {
-      app.getUser(this.postSave);
+    save: function(e) {
+      app.getUser(() => {
+        this.postSave(e);
+      });
     },
-    postSave: function() {
+    postSave: function(e) {
         const that = this;
         const data = this.data;
         if (this.validatePhone(this.data.phoneInput)) {
@@ -59,6 +70,10 @@ Page({
             invitation_id: that.id,
             userid: wx.getStorageSync('invitationsUserInfo').openid
         }
+        wx.setStorageSync("submitData", {
+            name: that.submitData.name,
+            phone: that.submitData.phone
+        })
         wx.request({
             url: domain + "/korjoApi/SaveInvitationUser",
             data: {dataJson: JSON.stringify(dataJson)},
@@ -72,49 +87,41 @@ Page({
                 const now = new Date().getTime();
                 const sendtime = that.dateForMessage + ' 10:00:00';
                 const formatedDateMs = that.formatDate(sendtime).getTime();
-                if ((formatedDateMs - now) < 7 * 24 * 60 * 60 * 1000 - 60 * 60 * 1000 && now < formatedDateMs) {
-                    let successTitle = "提交成功, 请柬信息将在" + that.sendDate  + "10：00通过微信的服务通知窗口推送给您"
-                    that.setData({
-                        successTitle: successTitle
-                    })
-                    function goSend() {
-                        that.send(e.detail.formId)
-                    }
-                    setTimeout(goSend, 2000);
-
+                const status = JSON.parse(response.data.replace(/[()]/g,'')).status;
+                let title = "提交成功";
+                if (status == 201) {
+                    title = "您已经报名";
+                    that.saveSuccssedHint(title);
                 } else {
-                    wx.setStorageSync("submitData", {
-                        name: that.submitData.name,
-                        phone: that.submitData.phone
-                    })
-                    const status = JSON.parse(response.data.replace(/[()]/g,'')).status;
-                    let title = "提交成功";
-                    if (status == 201) {
-                        title = "您已经报名";
-                    }
-                    wx.showToast({
-                        title,
-                        icon: "success",
-                        mask: true,
-                        duration: 2000
-                    });
-                    console.log("save successfully", response);
-                    setTimeout(that.goInvitation, 2000);
-                }
+                  if ((formatedDateMs - now) < 7 * 24 * 60 * 60 * 1000 - 60 * 60 * 1000 && now < formatedDateMs) {
+                      let successTitle = "提交成功, 请柬信息将在" + that.sendDate  + "10：00通过微信的服务通知窗口推送给您"
+                      that.setData({
+                        isHintHidden: false,
+                        hintText: successTitle,
+                      })
+                      function goSend() {
+                          that.send(e.detail.formId)
+                      }
+                      setTimeout(goSend, 2000);
 
+                  } else {
+                    that.saveSuccssedHint(title);
+                  }
+                }
             }
         })
     },
     send: function(formId) {
         const that = this;
-        const result = that.result;
-        const eventDate = result.duration.beDate + " " + result.beTime;
+        const result = that.data.result;
+        const eventDate = result.duration.beDate + " " + result.duration.beTime;
         const sendtime = this.dateForMessage + ' 10:00:00';
+        // const sendtime = "2018-1-12 17:12:00";
         const sendtype = 1;
         const param = {
             "touser": wx.getStorageSync("invitationsUserInfo").openid,
             "template_id": 'IbHDg3lz_N75_caoQ4fFmuN81vCD5Lks5pMe4dDbgMc',
-            "page": "/pages/index_v/index_v?id=" + that.id + "&share=true",
+            "page": "/pages/invitation/invitation?id=" + that.id + "&share=true",
             "form_id": formId,
             "data": {
                 "keyword1": {
@@ -126,12 +133,23 @@ Page({
                     "color": "#999999"
                 },
                 "keyword3": {
-                    "value": result.address,
+                    "value": result.locationInfo.address,
                     "color": "#999999"
                 }
             }
         }
         that.saveSendMsg(sendtime, param);
+    },
+    saveSuccssedHint: function(title) {
+      const that = this;
+      wx.showToast({
+          title,
+          icon: "success",
+          mask: true,
+          duration: 2000
+      });
+      console.log("提交用户信息");
+      setTimeout(that.goInvitation, 1500);
     },
     saveSendMsg: function(sendtime, param) {
         const that = this;
@@ -142,6 +160,7 @@ Page({
             "sendtype": 1,
             "openid": wx.getStorageSync("invitationsUserInfo").openid
         }
+        console.log("推送信息：", jsonData);
         wx.request({
             url: domain + SaveSendMsgUrl,
             data: {jsonData: JSON.stringify(jsonData)},
@@ -150,12 +169,6 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
             },
             success: function(response) {
-              wx.showToast({
-                  title: title,
-                  icon: "success",
-                  duration: 1500
-              });
-              console.log("submit successfully", response);
               setTimeout(that.goInvitation, 1500);
             }
         });

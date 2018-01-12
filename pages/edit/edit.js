@@ -38,7 +38,8 @@ Page({
           longitude: 113.3225692
         }
         result = that.getTime(result);
-        that.getDate(result);
+        result = that.getDate(result);
+        that.highLight(result);
     },
     getResultData: function(id) {
        const that = this;
@@ -52,7 +53,7 @@ Page({
            locationInfo: invitationData.locationInfo,
            duration: invitationData.duration
          }
-         that.setData({result})
+         that.highLight(result);
        } else {
          //如果是修改其他
          app.loading();
@@ -65,7 +66,7 @@ Page({
              duration: result.duration
            });
            wx.setStorageSync("templateData", result.templateData);
-           that.setData({result})
+           that.highLight(result);
          });
        }
     },
@@ -85,12 +86,12 @@ Page({
       result.duration.enDate = beDate;
       console.log("beStart", String(year) + "-01-01");
       this.setData({
-          result,
           beStart: String(year) + "-01-01",
           beEnd: String(year + 1) + "-12-31",
           enStart: String(year) + "-01-01",
           enEnd: String(year + 1) + "-12-31"
       })
+      return result;
     },
     getTime: function(result) {
       const date = new Date();
@@ -99,6 +100,34 @@ Page({
       const enTime = util.formatNumber(hour + 1) + ":00";
       result.duration = {beTime, enTime};
       return result;
+    },
+    highLight: function(result) {
+      //highlight 字体颜色与按钮颜色
+      const fontColors = this.data.fontColors;
+      const buttonColors = this.data.buttonColors;
+      let fontColorActiveIdx = "";
+      let buttonColorActiveIdx = "";
+      for (let i = 0, max = fontColors.length; i < max; i += 1) {
+        if (fontColors[i].color == result.templateData.fontColor) {
+          console.log("字体颜色是：", fontColors[i].color);
+          fontColors[i].active = "active";
+          fontColorActiveIdx = i;
+        }
+      }
+      for (let ii = 0, max = buttonColors.length; ii < max; ii += 1) {
+        if (buttonColors[ii].color == result.templateData.buttonColor) {
+          console.log("按钮颜色是：", buttonColors[ii].color);
+          buttonColors[ii].active = "active";
+          buttonColorActiveIdx = ii;
+        }
+      }
+      this.setData({
+        result,
+        fontColors,
+        buttonColors,
+        fontColorActiveIdx,
+        buttonColorActiveIdx
+      })
     },
     chooseDuration: function(e) {
       const result = this.data.result;
@@ -297,11 +326,9 @@ Page({
         ctx.drawImage("../../images/postmark.png", that.windowWidth -200, 55, 120, 60);
         ctx.setFillStyle('#ffffff');
         ctx.setFontSize(18);
-        ctx.setTextAlign('center');
-        ctx.setTextBaseline('middle')
-        ctx.fillText(`开始时间：${result.duration.beDate} ${result.duration.beTime}`, that.windowWidth / 2, 170);
-        ctx.fillText(`结束时间：${result.duration.enDate} ${result.duration.enTime}`, that.windowWidth / 2, 200);
-        ctx.fillText(`举办地点：${result.locationInfo.name}`, that.windowWidth / 2, 230);
+        ctx.fillText(`开始时间：${result.duration.beDate} ${result.duration.beTime}`, 80, 170);
+        ctx.fillText(`结束时间：${result.duration.enDate} ${result.duration.enTime}`, 80, 200);
+        ctx.fillText(`举办地点：${result.locationInfo.name}`, 80, 230);
         ctx.draw();
         setTimeout(()=> {
           that.getShareImg(result, (shareImg) => {
