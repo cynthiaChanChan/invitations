@@ -5,9 +5,7 @@ Page({
     isHintHidden: true
   },
   onLoad: function() {
-    // wx.reLaunch({
-    //   url: "../submit/submit?id=80"
-    // })
+    
   },
   goCreate: function () {
     wx.navigateTo({

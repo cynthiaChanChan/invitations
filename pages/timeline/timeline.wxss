@@ -3,8 +3,27 @@ page {
 }
 
 .listsWrapper {
-	padding: 50rpx 30rpx 0 30rpx;
 	padding-bottom: 130rpx;
+}
+
+.wrapper {
+	background-color: #ffffff;
+	padding: 0 30rpx;
+	margin-top: 10rpx;
+}
+
+.type {
+	font-size: 30rpx;
+	background-color: #fff;
+	padding: 30rpx;
+	text-align: center;
+	display: inline-block;
+	width: 50%;
+}
+
+.type.active {
+	color: #67bcdb;
+	border-bottom: 2px solid #67bcdb;
 }
 
 .dayList {
@@ -79,6 +98,19 @@ page {
 	width: 40rpx;
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.dayList .dateWrapper .itemTitle {
+	font-size: 32rpx;
+}
+
+.dayList .arrow {
+	position: absolute;
+	width: 50rpx;
+	top: 50%;
+	right: 30rpx;
+	-webkit-transform: translateY(-50%);
+	-transform: translateY(-50%);
 }
 
 .hint {

@@ -102,7 +102,7 @@ view {
   left: 0;
 	text-align: center;
 	background-color: #fbfbfb;
-	padding: 20rpx 20rpx 60rpx 20rpx;
+	padding: 20rpx;
 	color: #333;
 	font-size: 30rpx;
 	line-height: 1;
@@ -118,100 +118,34 @@ view {
 	right: 20rpx;
 }
 
-.sticky_wrapper .wrap .button {
-  font-size: inherit;
-	display: inline-block;
-	vertical-align: middle;
-	width: 20%;
-	height: 60rpx;
-	line-height: 60rpx;
-	border-radius: 10rpx;
-	border: 2rpx solid #ccc;
-	border-bottom-color: #b3b3b3;
-}
-
-.sticky_wrapper .wrap .button.left {
-  color: #fff;
-	left: 0;
-	background-color: rgba(231,76,60,.8);
-}
-
-.sticky_wrapper .wrap .button.right {
-	color: #fff;
-	right: 0;
-	background-color: #e74c3c;
-}
-
 .sticky_wrapper .wrap .stages {
 	width: 100%;
 	display: inline-block;
 	vertical-align: middle;
-}
-
-.sticky_wrapper .wrap .stages .stage{
-	position: relative;
-	width: 25%;
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 0;
-}
-
-.sticky_wrapper .wrap .stages .circle {
-  display: inline-block;
-	height: 25rpx;
-	width: 25rpx;
-	border: 5rpx solid #999;
-	background: #999;
-	border-radius: 25rpx;
-}
-
-.sticky_wrapper .wrap .stages .circle:after {
-  left: 50%;
-}
-
-.sticky_wrapper .wrap .stages .circle:before {
-  left: 0;
-}
-
-.sticky_wrapper .wrap .stages .circle:after, .sticky_wrapper .wrap .stages .circle:before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    width: 50%;
-    height: 100%;
-    z-index: -1;
-    background-repeat: repeat-x;
-    background-position: 0 12rpx;
-    background-image: url(https://www.korjo.cn/xcx/invitationImg/line.png);
-}
-
-.sticky_wrapper .wrap .stages .stage:first-of-type .circle:before {
-    background: none;
-}
-
-.sticky_wrapper .wrap .stages .stage:last-of-type .circle:after {
-    background: none;
+  padding: 20rpx 0;
+  margin-bottom: 10rpx;
 }
 
 
-.sticky_wrapper .wrap .stages .stage.current .circle{
-	background: #333;
-	border-color: #333;
-}
-
-.sticky_wrapper .wrap .stages .title {
-	text-align: center;
-  margin-top: 10rpx;
+.sticky_wrapper .wrap .stages .stage {
+  width: 35%;
   line-height: 1;
-  padding: 10rpx 0;
+  padding: 20rpx 0;
+  color: #fff;
+  margin: 0 auto;
+  text-align: center;
   font-size: 30rpx;
+  border-radius: 10rpx;
+  background-color: #e74c3c;
+  box-shadow: 1px 1px 4px rgba(0,0,0,.5);
 }
 
-.sticky_wrapper .wrap .stages .title.abled {
-	background-color: #e74c3c;
-  box-shadow: 1px 1px 4px rgba(0,0,0,.5);
-  color: #fff;
-  border-radius: 10rpx;
+.sticky_wrapper .wrap .stages .stage:first-child {
+  float: left;
+}
+
+.sticky_wrapper .wrap .stages .stage:nth-child(2) {
+  float: right;
 }
 
 /*animation*/

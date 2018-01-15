@@ -3,10 +3,8 @@
   <view class="sticky_wrapper {{animation}}" hidden="{{isHide}}">
     <view class="wrap">
         <view class="stages">
-          <view class="stage" bindtap="goEdit"><view class="circle"></view><view class="title abled">修改</view></view>
-          <view class="stage"><view class="circle"></view><view class="title">案例</view></view>
-          <view class="stage"><view class="circle"></view><view class="title">制作</view></view>
-          <view class="stage current"><view class="circle"></view><button class="title abled" open-type="share">分享</button></view>
+          <view class="stage" bindtap="goEdit">修改</view>
+          <button class="stage abled" open-type="share">分享</button>
         </view>
     </view>
     <image bindtap="switch" class="switch" src="../../images/cancel.png"></image>

@@ -11,14 +11,13 @@ page {
   height: 100%;
 }
 
-
 .sticky_wrapper .colors {
 	padding: 30rpx 0;
 	border-bottom: 1px solid #D9DDE0;
 }
 
 .sticky_wrapper .colors.first {
-	margin-top: 20rpx;
+  padding-top: 0;
 }
 
 .sticky_wrapper .colors .title {
@@ -122,4 +121,5 @@ page {
 
 .hint {
 	margin-top: 20rpx;
+	color: #999;
 }

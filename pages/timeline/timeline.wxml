@@ -1,23 +1,36 @@
 <view class="listsWrapper">
-	<view class="dayList" wx:for="{{listsArray}}" wx:key="id">
-		<view class="dateWrapper">
-			<image bindtap="goInvitation" data-id="{{item.id}}" class="datePic" src="../../images/invitation.png" mode="widthFix"></image>
-			<view bindtap="goInvitation" data-id="{{item.id}}" class="date">{{item.dataObj.title}}</view>
-			<image bindtap="getAcceptance" data-index="{{index}}" class="arrow" src="../../images/profile.png" mode="widthFix"></image>
-    	</view>
-    	<view class="lists" hidden="{{item.isHidden}}">
-    		<view class="list" wx:for="{{item.userList}}" wx:key="id" wx:for-index="idx" wx:for-item="itemName">
-			    <view class="listContainer">
-			       <image class="clock" src="../../images/profile_s.png" mode="widthFix"></image>
-			       <view class="sub_title">{{itemName.username}}</view>
-			       <view class="address firstAddress"><text>{{itemName.phone}}</text></view>
-			    </view>
+	<view class="type {{item.active}}" bindtap="checkType" wx:for="{{types}}" wx:key="{{index}}" data-index="{{index}}">{{item.title}}</view>
+	<view class="wrapper" hidden="{{types[0].active.length == 0}}">
+		<view class="hint" hidden="{{isHintHidden}}">暂无您制作的请柬</view>
+		<view class="dayList" wx:for="{{listsArray}}" wx:key="id">
+			<view class="dateWrapper">
+				<image bindtap="goInvitation" data-id="{{item.id}}" class="datePic" src="../../images/invitation.png" mode="widthFix"></image>
+				<view bindtap="goInvitation" data-id="{{item.id}}" class="date">{{item.dataObj.title}}</view>
+				<image bindtap="getAcceptance" data-index="{{index}}" class="arrow" src="../../images/profile.png" mode="widthFix"></image>
+	    	</view>
+	    	<view class="lists" hidden="{{item.isHidden}}">
+	    		<view class="list" wx:for="{{item.userList}}" wx:key="id" wx:for-index="idx" wx:for-item="itemName">
+				    <view class="listContainer">
+				       <image class="clock" src="../../images/profile_s.png" mode="widthFix"></image>
+				       <view class="sub_title">{{itemName.username}}</view>
+				       <view class="address firstAddress"><text>{{itemName.phone}}</text></view>
+				    </view>
+				</view>
+				<view class="hint" wx:if ="{{item.userList.length == 0}}">暂无应邀人员</view>
+	    	</view>
+	    </view>
+	</view>
+	<view class="wrapper" hidden="{{types[1].active.length == 0}}">
+		<view class="hint" hidden="{{isNullHidden}}">暂无您报名的请柬</view>
+		<view class="dayList clearfix" wx:for="{{items}}" wx:key="{{index}}" data-share="true" bindtap="goInvitation" data-id="{{item.id}}">
+			<view class="dateWrapper">
+				<view class="itemTitle">{{item.dataObj.title}}</view>
+				<view class="itemTitle">{{item.dataObj.duration.enDate}} {{item.dataObj.duration.enTime}} 结束</view>
+				<image class="arrow" src="../../images/right-arrow.png" mode="widthFix"></image>
 			</view>
-			<view class="hint" wx:if ="{{item.userList.length == 0}}">暂无应邀人员</view>
-    	</view>
-    </view>
+		</view>
+	</view>
 </view>
-<view class="hint" hidden="{{isHintHidden}}">暂无请柬</view>
 <view class="footer">
 	<view class="button" id="goCreate" bindtap="goCreate">制作请柬</view>
 </view>

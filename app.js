@@ -26,7 +26,7 @@ App({
                 }
             });
         } else {
-            callback()
+            callback();
         }
   },
   loading: function() {
