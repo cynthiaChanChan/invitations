@@ -2,13 +2,12 @@
   <image bindtap="open" id="open" src="../../images/edit.png"></image>
   <view class="sticky_wrapper {{animation}}">
     <view class="wrap">
-      <view class="button left" bindtap="goCreate">改变场景</view>
         <view class="stages">
+          <view class="stage" bindtap="goCreate"><view class="circle"></view><view class="title abled">改变场景</view></view>
           <view class="stage"><view class="circle"></view><view class="title">案例</view></view>
-          <view class="stage current"><view class="circle"></view><view class="title">制作</view></view>
+          <view class="stage current" bindtap="ShareImg"><view class="circle"></view><view class="title abled">生成请柬</view></view>
           <view class="stage"><view class="circle"></view><view class="title">分享</view></view>
         </view>
-      <view class="button right" bindtap="ShareImg">生成请柬</view>
     </view>
     <view class="colors first">
       <view class="title">选择内容字体颜色</view>
@@ -24,7 +23,8 @@
     </view>
     <view class="gatherLocation">
   		<view class="list">
-  			<input maxlength="15" bindinput="titleInput" placeholder="填写请柬主题(15字以内) *" placeholder-style="color: #e74737;" value="{{result.title}}"/>
+        <view class="h3">请柬主题 *</view>
+  			<input maxlength="15" bindinput="titleInput" placeholder="填写请柬主题(15字以内) *" value="{{result.title}}"/>
   		</view>
   		<view class="list" bindtap="chooseLocation">
   			<view class="h3">举办地点 *</view>
@@ -56,6 +56,7 @@
   		    </view>
   		</view>
     </view>
+    <view class="hint">*您可在生成请柬前点击页面底部的按钮查看效果</view>
     <image bindtap="switch" class="switch" src="../../images/cancel.png"></image>
   </view>
   <view class="index_container" style="color: {{result.templateData.fontColor}};">

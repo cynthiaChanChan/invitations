@@ -5,6 +5,7 @@ const SaveSendMsgUrl = "/KorjoApi/SaveSendMsg";
 const domain = app.globalData.domain;
 Page({
     data: {
+      isEnvolopeShow: false,
       isDisabled: false,
       isHintHidden: true,
       namePlaceHolder: "姓名",
@@ -22,10 +23,10 @@ Page({
         phonePlaceHolder = "";
       }
       this.setData({
-            nameInput: this.submitData.name || "",
-            phoneInput: this.submitData.phone || "",
-            phonePlaceHolder,
-            namePlaceHolder
+        nameInput: this.submitData.name || "",
+        phoneInput: this.submitData.phone || "",
+        phonePlaceHolder,
+        namePlaceHolder
       })
       this.getResultData(this.id);
     },
@@ -50,6 +51,14 @@ Page({
          }
          that.setData({result})
        });
+    },
+    goBack: function() {
+        app.navigateBack();
+    },
+    goIndex: function() {
+        wx.redirectTo({
+          url: "../index/index"
+        });
     },
     save: function(e) {
       app.getUser(() => {
@@ -174,8 +183,8 @@ Page({
         });
     },
     goInvitation: function(){
-      wx.redirectTo({
-          url: "../invitation/invitation?id=" + this.id + "&share=true"
+      this.setData({
+        isEnvolopeShow: true
       })
     },
     formatDate(time) {

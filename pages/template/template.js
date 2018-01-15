@@ -53,6 +53,11 @@ Page({
          animation: "slideOutUp"
        })
     },
+    open: function() {
+       this.setData({
+         animation: "slideInDown fast"
+       })
+    },
     goEdit: function(e) {
         let url = "../edit/edit";
         if (this.id) {

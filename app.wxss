@@ -34,7 +34,7 @@ view {
 .footer {
   padding: 25rpx 50rpx;
   position: fixed;
-  bottom: 0;
+  bottom: 70rpx;
   left: 0;
   width: 100%;
   background-color: #fbfbfb;
@@ -143,29 +143,21 @@ view {
 }
 
 .sticky_wrapper .wrap .stages {
-	width: 60%;
+	width: 100%;
 	display: inline-block;
 	vertical-align: middle;
 }
 
 .sticky_wrapper .wrap .stages .stage{
 	position: relative;
-	width: 33.33%;
+	width: 25%;
 	display: inline-block;
 	vertical-align: middle;
 	margin-right: 0;
-	height: 64rpx;
-	background-repeat: repeat-x;
-	background-position: center center;
-	background-image: url(https://www.korjo.cn/xcx/invitationImg/line.png);
 }
 
 .sticky_wrapper .wrap .stages .circle {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+  display: inline-block;
 	height: 25rpx;
 	width: 25rpx;
 	border: 5rpx solid #999;
@@ -173,17 +165,53 @@ view {
 	border-radius: 25rpx;
 }
 
+.sticky_wrapper .wrap .stages .circle:after {
+  left: 50%;
+}
+
+.sticky_wrapper .wrap .stages .circle:before {
+  left: 0;
+}
+
+.sticky_wrapper .wrap .stages .circle:after, .sticky_wrapper .wrap .stages .circle:before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+    background-repeat: repeat-x;
+    background-position: 0 12rpx;
+    background-image: url(https://www.korjo.cn/xcx/invitationImg/line.png);
+}
+
+.sticky_wrapper .wrap .stages .stage:first-of-type .circle:before {
+    background: none;
+}
+
+.sticky_wrapper .wrap .stages .stage:last-of-type .circle:after {
+    background: none;
+}
+
+
 .sticky_wrapper .wrap .stages .stage.current .circle{
 	background: #333;
 	border-color: #333;
 }
 
 .sticky_wrapper .wrap .stages .title {
-	position: absolute;
-	bottom: -20rpx;
-	left: 50%;
-	-webkit-transform: translateX(-50%);
-	transform: translateX(-50%);
+	text-align: center;
+  margin-top: 10rpx;
+  line-height: 1;
+  padding: 10rpx 0;
+  font-size: 30rpx;
+}
+
+.sticky_wrapper .wrap .stages .title.abled {
+	background-color: #e74c3c;
+  box-shadow: 1px 1px 4px rgba(0,0,0,.5);
+  color: #fff;
+  border-radius: 10rpx;
 }
 
 /*animation*/

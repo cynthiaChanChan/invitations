@@ -1,14 +1,14 @@
 <view class="page" style="background: center center /cover url({{result.templateData.img}}) fixed no-repeat;">
-	<view class="sticky_wrapper">
-		<view class="wrap">
-			<view class="button left" bindtap="goCreate">返回</view>
-				<view class="stages">
-					<view class="stage current"><view class="circle"></view><view class="title">案例</view></view>
-					<view class="stage"><view class="circle"></view><view class="title">制作</view></view>
-					<view class="stage"><view class="circle"></view><view class="title">分享</view></view>
-				</view>
-			<view class="button right" bindtap="goEdit">开始制作</view>
-		</view>
+	<image bindtap="open" id="open" src="../../images/edit.png" hidden="{{isHide}}"></image>
+	<view class="sticky_wrapper {{animation}}">
+    <view class="wrap">
+      <view class="stages">
+        <view class="stage" bindtap="goCreate"><view class="circle"></view><view class="title abled">改变场景</view></view>
+        <view class="stage current"><view class="circle"></view><view class="title">案例</view></view>
+        <view class="stage" bindtap="goEdit"><view class="circle"></view><view class="title abled">返回制作</view></view>
+        <view class="stage"><view class="circle"></view><view class="title">分享</view></view>
+      </view>
+    </view>
 		<image class="switch" bindtap="switch" src="../../images/cancel.png"></image>
 	</view>
 	<form class="acceptanceForm" style="color: {{result.templateData.fontColor}};">

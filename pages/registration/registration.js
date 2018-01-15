@@ -18,14 +18,22 @@ Page({
        })
     },
     goEdit: function(e) {
-        let url = "../edit/edit";
-        if (this.id) {
-          url += "?id=" + this.id + "&update=" + this.update;
-        }
-  	    wx.redirectTo({url});
+        // let url = "../edit/edit";
+        // if (this.id) {
+        //   url += "?id=" + this.id + "&update=" + this.update;
+        // }
+  	    // wx.redirectTo({url});
+        app.navigateBack();
+    },
+    open: function() {
+       this.setData({
+         animation: "slideInDown fast"
+       })
     },
     goCreate: function(e) {
-  	    app.navigateBack();
+  	    wx.navigateBack({
+          delta: 2
+        })
     },
     hideHint: function() {
         this.setData({

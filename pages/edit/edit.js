@@ -334,7 +334,7 @@ Page({
           that.getShareImg(result, (shareImg) => {
               result.shareImg = shareImg;
               that.save(result);
-              console.log(shareImg)
+              // console.log(shareImg)
           })
         }, 100);
 

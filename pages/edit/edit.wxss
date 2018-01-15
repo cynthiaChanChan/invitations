@@ -56,8 +56,7 @@ page {
 }
 .gatherLocation .list input {
 	box-sizing: content-box;
-	color: #e74737;
-	text-align: center;
+	text-align: right;
   position: absolute;
   top: 50%;
   left: 30rpx;
@@ -119,4 +118,8 @@ page {
 .gatherLocation .list .infoWrapper .time {
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.hint {
+	margin-top: 20rpx;
 }
