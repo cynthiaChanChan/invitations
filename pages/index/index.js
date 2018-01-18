@@ -2,10 +2,9 @@ const app = getApp()
 
 Page({
   data: {
-    isHintHidden: true
   },
   onLoad: function() {
-    
+
   },
   goCreate: function () {
     wx.navigateTo({
@@ -13,14 +12,9 @@ Page({
 		})
   },
   showDesc: function() {
-    this.setData({
-      isHintHidden: false
-    })
-  },
-  hideHint: function() {
-      this.setData({
-          isHintHidden: true
-      })
+    wx.navigateTo({
+			url: "../intro/intro"
+		})
   },
   goTimeline: function () {
     wx.navigateTo({

@@ -3,3 +3,7 @@
    -webkit-animation-duration: 1s;
            animation-duration: 1s;
 }
+
+.shareHint {
+  color: #999;
+}

@@ -42,6 +42,7 @@
 }
 
 .chooser .choice .typeName {
+  font-size: 29rpx;
   position: absolute;
   top: 50%;
   left: 0;

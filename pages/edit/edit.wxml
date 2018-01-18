@@ -26,7 +26,7 @@
   			</view>
   		</view>
   		<view class="list">
-  			<view class="h3">开始时间 *</view>
+  			<view class="h3">举办开始时间 *</view>
   			<view class="infoWrapper">
   				<picker bindchange="chooseDuration" data-type="beDate" mode="date" value="{{result.duration.beDate}}" start="{{beStart}}" end="{{beEnd}}">
   			       <view class="picker">{{result.duration.beDate}}</view>
@@ -37,7 +37,7 @@
   			</view>
   		</view>
   		<view class="list">
-  			<view class="h3">结束时间 *</view>
+  			<view class="h3">举办结束时间 *</view>
   			<view class="infoWrapper">
   				<picker bindchange="chooseDuration" data-type="enDate" mode="date" value="{{result.duration.enDate}}" start="{{enStart}}" end="{{enEnd}}">
   			       <view class="picker">{{result.duration.enDate}}</view>
@@ -54,7 +54,7 @@
           <view class="stage" bindtap="ShareImg">生成请柬</view>
         </view>
     </view>
-    <view class="hint">*您可在生成请柬前点击页面底部的按钮查看效果</view>
+    <view class="hint">*您可在生成请柬前点击下方“应邀报名”看报名页效果</view>
     <image bindtap="switch" class="switch" src="../../images/cancel.png"></image>
   </view>
   <view class="index_container" style="color: {{result.templateData.fontColor}};">

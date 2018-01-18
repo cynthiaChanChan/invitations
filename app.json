@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/intro/intro",
     "pages/create/create",
     "pages/template/template",
     "pages/registration/registration",

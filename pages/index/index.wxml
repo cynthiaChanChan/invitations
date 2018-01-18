@@ -21,9 +21,3 @@
   </view>
   <view class="h5" bindtap="showDesc">粉我吧科技出品</view>
 </view>
-<view class="lightbox" bindtap="hideHint" hidden="{{isHintHidden}}">
-	<view class="fail">
-	  <image class="hintImg" src="../../images/email.png" mode="widthFix"></image>
-	  <view class="text"><text>如果您想将此小程序关联到公众号\n或者想制作一个属于自己的小程序\n请电邮：bron@korjo.cn\n或致电：4008330032</text></view>
-	</view>
-</view>

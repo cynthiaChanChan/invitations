@@ -6,6 +6,7 @@
           <view class="stage" bindtap="goEdit">修改</view>
           <button class="stage abled" open-type="share">分享</button>
         </view>
+        <view class="shareHint">*点击“分享”后，请稍等待出现分享图片再发送</view>
     </view>
     <image bindtap="switch" class="switch" src="../../images/cancel.png"></image>
   </view>
